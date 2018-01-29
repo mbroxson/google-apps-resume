@@ -1,0 +1,118 @@
+{% extends "base.htm" %}
+{% set circle = '<span class="circle"></span>' %}
+{% macro th(text, colspan=1, class='') -%}
+<th {% if colspan > 1 %}colspan="{{ colspan }}"{% endif %} {% if class != '' %}class="{{ class }}"{% endif %}>{{ text }}</th>
+{%- endmacro %}
+{% macro td(text, colspan=1, class='') -%}
+<td {% if colspan > 1 %}colspan="{{ colspan }}"{% endif %} {% if class != '' %}class="{{ class }}"{% endif %}>{{ text }}</td>
+{%- endmacro %}
+{% macro tr(cells) -%}
+<tr>{% for cell in cells %}{{ cell }}{% endfor %}</tr>
+{%- endmacro %}
+{% macro spacer() -%}
+<tr><td style="line-height: 25%;">&nbsp;</td></tr>
+{%- endmacro %}
+{% macro li(text) -%}
+<li>{{ text }}</li>
+{%- endmacro %}
+{% macro ul(items) -%}
+<ul>{% for item in items %}{{ item }}{% endfor %}</ul>
+{%- endmacro %}
+{% block content %}
+<div>
+	<table border="0" celpadding="0" cellspacing="0">
+		{{ tr(th('Mitchell Broxson', 2, 'large_font')) }}
+		{{ tr(td('202 Wooddale St. ' + circle + ' Maryville, TN 37801 ' + circle + ' (865) 300-3618 ' + circle + ' MitchellBroxson@gmail.com', 2, 'center')) }}
+		{{ tr(td('<hr>', 2)) }}
+		
+		{{ tr(th('OBJECTIVE', 2, 'left')) }}
+		{{ tr(td('To further my knowledge in software development field in order to improve myself and my employer.', 2, 'indent_left')) }}
+		
+		{{ spacer() }}
+		
+		{{ tr(th('EDUCATION', 2, 'left')) }}
+		{{ tr([td('<span class="large_font">Florida Institute of Technology</span>, Melbourne, FL', class='indent_left'), td('May 2015', class='right')]) }}
+		{{ tr(td('Master of Science in Information Technology', 2, 'indent_left bold')) }}
+		{{ tr([td('<span class="large_font">Florida Institute of Technology</span>, Melbourne, FL', class='indent_left'), td('Dec 2012', class='right')]) }}
+		{{ tr(td('Bachelor of Science in Computer Information Systems', 2, 'indent_left bold')) }}
+		{{ tr([td('<span class="large_font">Pellissippi State Technical Community College</span>, Knoxville, TN', class='indent_left'), td('May 2009', class='right')]) }}
+		{{ tr(td('Associate of Applied Science in Computer Science and Information Technology<br>Programming Concentration', 2, 'indent_left bold')) }}
+		
+		{{ spacer() }}
+		
+		{{ tr(th('SKILLS', 2, 'left')) }}
+		{{ tr(td('<span class="bold">Programming Languages:</span> HTML, JavaScript, CSS, Python, C, PHP, Java, Shell, AWK, Perl, AutoHotKey', 2, 'indent_left')) }}
+		{{ tr(td('<span class="bold">Databases:</span> c-tree, MSSQL, MySQL, PostgreSQL, MS Access, Mongo', 2, 'indent_left')) }}
+		{{ tr(td('<span class="bold">Environments:</span> Linux, Windows, All major browsers', 2, 'indent_left')) }}
+		{{ tr(td('<span class="bold">Servers:</span> Apache, Google App Engine, SVN, SSH, SFTP, FTP, SAMBA', 2, 'indent_left')) }}
+		
+		{{ spacer() }}
+		
+		{{ tr(th('EXPERIENCE', 2, 'left')) }}
+		{{ tr([td('<span class="large_font">QRS, Inc.</span>', class='indent_left'), td('Knoxville, TN', class='right')]) }}
+		{{ tr([td('<span class="bold">Lead Product Developer</span>', class='indent_left'), td('Dec 2012 - Present', class='right')]) }}
+		{{ tr(
+		      td(
+		         ul([
+		             li('Lead developer of web based Electronic Medical Records software'),
+		             li('Led development efforts to successfully obtain 2014 ONC HIT Certification'),
+		             li('Leading efforts to move the software backend to a modern environment'),
+		             li('Evaluated and integrated open and closed source libraries/products'),
+		             li('Tier-III support'),
+		             li('Internal systems development'),
+		             li('Indirectly manage EHR development team'),
+		             li('Indirectly manage interface/data conversion team'),
+		             ]),
+		         colspan=2,
+		         class='indent_left'
+		         )
+		      ) }}
+		{{ tr([td('<span class="bold">Intermediate Software Developer</span>', class='indent_left'), td('Mar 2011 - Dec 2012', class='right')]) }}
+		{{ tr(
+		      td(
+		         ul([
+		             li('Coordinated seamless system integration with 3rd party systems'),
+		             li('Tier-II support'),
+		             li('Oversee interface implementations'),
+		             li('Oversee data conversion processes'),
+		             ]),
+		         colspan=2,
+		         class='indent_left'
+		         )
+		      ) }}
+		{{ tr([td('<span class="bold">Entry Level Developer</span>', class='indent_left'), td('Jun 2009 - Mar 2011', class='right')]) }}
+		{{ tr(
+		      td(
+		         ul([
+		             li('Develop and maintain interfaces with other software'),
+		             li('Data conversions from previous software for new clients'),
+		             li('Interface support'),
+		             li('Tier-II support'),
+		             ]),
+		         colspan=2,
+		         class='indent_left'
+		         )
+		      ) }}
+		{{ tr([td('<span class="large_font">Goody\'s Family Clothing.</span>', class='indent_left'), td('Knoxville, TN', class='right')]) }}
+		{{ tr([td('<span class="bold">Helpdesk Technician</span>', class='indent_left'), td('Nov 2008 - Jan 2009', class='right')]) }}
+		{{ tr(
+		      td(
+		         ul([
+		             li('Tier-I support'),
+		             li('Resolved support issues for PCs, Servers, and POS systems for over 300 stores'),
+		             li('Resolved support issues for PC and software for over 500 corporate users'),
+		             ]),
+		         colspan=2,
+		         class='indent_left'
+		         )
+		      ) }}
+		
+		{{ spacer() }}
+		
+		{{ tr(th('CODE EXAMPLE', 2, 'left')) }}
+		{{ tr(td('As you can see above, I have been working while continuing my education.  Unfortunately, this has not left time to work on open source projects in my personal time.', 2, 'indent_left')) }}
+		{{ tr(td('The best I can give right now would be the source code to this site. I will be updating this site as I continue my career search, so please check back to see improvements. <a href="/files/src.zip">Download Now</a>', 2, 'indent_left')) }}
+		{{ tr(td('Please contact me if you would like to request specific code examples.', 2, 'indent_left')) }}
+	</table>
+</div>
+{% endblock %}

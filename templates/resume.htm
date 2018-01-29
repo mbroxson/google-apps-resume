@@ -1,0 +1,52 @@
+{% extends "base.htm" %}
+{% set circle = '<span class="circle"></span>' %}
+{% macro th(text, colspan=1, class='') -%}
+<th {% if colspan > 1 %}colspan="{{ colspan }}"{% endif %} {% if class != '' %}class="{{ class }}"{% endif %}>{{ text }}</th>
+{%- endmacro %}
+{% macro td(text, colspan=1, class='') -%}
+<td {% if colspan > 1 %}colspan="{{ colspan }}"{% endif %} {% if class != '' %}class="{{ class }}"{% endif %}>{{ text }}</td>
+{%- endmacro %}
+{% macro tr(cells) -%}
+<tr>{% for cell in cells %}{{ cell }}{% endfor %}</tr>
+{%- endmacro %}
+{% macro spacer() -%}
+<tr><td style="line-height: 25%;">&nbsp;</td></tr>
+{%- endmacro %}
+{% macro li(text) -%}
+<li>{{ text }}</li>
+{%- endmacro %}
+{% macro ul(items, call_li=False) -%}
+<ul>{% for item in items %}{% if call_li %}{{ li(item) }}{% else %}{{ item }}{% endif %}{% endfor %}</ul>
+{%- endmacro %}
+{% macro fmt_date(date=None) -%}
+{% if date == None %}Present{% else %}{{ date.strftime('%b %Y') }}{% endif %}
+{%- endmacro %}
+{% block content %}
+<table border="0" celpadding="0" cellspacing="0">
+	{{ tr(th(PersonalInfo.first_name + ' ' + PersonalInfo.middle_name + ' ' + PersonalInfo.last_name, 2, 'large_font')) }}
+	{{ tr(td(PersonalInfo.address + ' ' + circle + ' ' + PersonalInfo.city + ', ' + PersonalInfo.state + ' ' + PersonalInfo.zip + ' ' + circle + ' ' + PersonalInfo.phone + ' ' + circle + ' ' + PersonalInfo.email, 2, 'center')) }}
+	{{ tr(td('<hr>', 2)) }}
+	{% set lst_sub_title = '' %}
+	{% for section in section_order %}
+		{{ spacer() }}
+		{{ tr(th(section, 2, 'left')) }}
+		{% for sec in sections[section] %}
+			{% if sec.type == 'text' or sec.type == 'html' %}
+				{{ tr(td(sec.text, 2, 'indent_left')) }}
+			{% elif sec.type == 'short_desc' %}
+				{{ tr([td('<span class="large_font">' + sec.sub_title + '</span>, ' + sec.city + ', ' + sec.state, class='indent_left'), td(fmt_date(sec.end_date), class='right')]) }}
+				{{ tr(td(sec.text|replace('\\n', '<br>'), 2, 'indent_left bold')) }}
+			{% elif sec.type == 'simple_list' %}
+				{{ tr(td('<span class="bold">' + sec.sub_title + ':</span> ' + sec.items|join(', '), 2, 'indent_left')) }}
+			{% elif sec.type == 'list' %}
+				{% if sec.sub_title != lst_sub_title %}
+				{{ tr([td('<span class="large_font">' + sec.sub_title + '</span>', class='indent_left'), td(sec.city + ', ' + sec.state, class='right')]) }}
+				{% set lst_sub_title = sec.sub_title %}
+				{% endif %}
+				{{ tr([td('<span class="bold">' + sec.text +  '</span>', class='indent_left'), td(fmt_date(sec.start_date) + ' - ' + fmt_date(sec.end_date), class='right')]) }}
+				{{ tr(td(ul(sec.items, True), 2, 'indent_left')) }}
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+</table>
+{% endblock %}

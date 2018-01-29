@@ -1,0 +1,33 @@
+html, body {
+	margin: 0px;
+	background: #eee;
+	width: 100%;
+}
+#content {
+	margin: auto;
+	width: 800px;
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.center { text-align: center; }
+.left { text-align: left; }
+.right { text-align: right; }
+.circle {
+	width: 6px;
+	height: 6px;
+	display: inline-block;
+	background: black;
+	vertical-align: middle;
+	margin: -3px 5px 0px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.indent_left { padding-left: 50px; }
+.large_font { font-size: 120%; }
+.bold { font-weight: bold; }
+ul {
+	margin: 0px;
+}
